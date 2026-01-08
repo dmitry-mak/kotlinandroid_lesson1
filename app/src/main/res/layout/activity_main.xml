@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="likeIcon,viewsIcon" />
+        app:constraint_referenced_ids="likeIcon, shareIcon,viewsIcon" />
 
 
     <TextView
