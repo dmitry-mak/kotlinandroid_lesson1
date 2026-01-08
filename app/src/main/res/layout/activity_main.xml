@@ -5,18 +5,138 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/netology_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/netology_48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/general_spacing16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/author"
+        app:layout_constraintBottom_toTopOf="@+id/publish_day"
+        app:layout_constraintEnd_toStartOf="@+id/more_button"
+        app:layout_constraintStart_toEndOf="@id/netology_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <ImageButton
+        android:id="@+id/more_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="#0000FF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/publish_day"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/general_spacing16dp"
+        android:text="@string/date"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/netology_logo"
+        app:layout_constraintEnd_toStartOf="@+id/more_button"
+        app:layout_constraintStart_toEndOf="@id/netology_logo"
+        app:layout_constraintTop_toBottomOf="@id/author" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="netology_logo,publish_day" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/end_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="likeIcon,viewsIcon" />
+
+
+    <TextView
+        android:id="@+id/post_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/general_spacing16dp"
+        android:autoLink="web"
+        android:text="@string/post_content_text"
+        app:layout_constraintTop_toBottomOf="@+id/top_barrier" />
+
+    <ImageButton
+        android:id="@+id/shareIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="10dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_share_24"
+        app:layout_constraintBottom_toBottomOf="@id/likeIcon"
+        app:layout_constraintStart_toEndOf="@+id/likesCount"
+        app:layout_constraintTop_toTopOf="@id/likeIcon" />
+
+
+    <TextView
+        android:id="@+id/shareCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="@string/shareCount"
+        app:layout_constraintBottom_toBottomOf="@id/shareIcon"
+        app:layout_constraintStart_toEndOf="@id/shareIcon"
+        app:layout_constraintTop_toTopOf="@+id/shareIcon" />
+
+    <TextView
+        android:id="@+id/likesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="@string/likesCount"
+        app:layout_constraintBottom_toBottomOf="@id/likeIcon"
+        app:layout_constraintStart_toEndOf="@id/likeIcon"
+        app:layout_constraintTop_toTopOf="@+id/likeIcon" />
+
+
+    <TextView
+        android:id="@+id/viewsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/viewsCount"
+        app:layout_constraintBottom_toBottomOf="@+id/viewsIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewsIcon" />
+
+    <ImageButton
+        android:id="@+id/likeIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="@dimen/general_spacing16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/heart24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.205" />
+        app:layout_constraintTop_toBottomOf="@id/post_content" />
+
+    <ImageView
+        android:id="@+id/viewsIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="6dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/eye_fill_icon"
+        app:layout_constraintBottom_toBottomOf="@id/likeIcon"
+        app:layout_constraintEnd_toStartOf="@id/viewsCount"
+        app:layout_constraintTop_toTopOf="@id/likeIcon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
