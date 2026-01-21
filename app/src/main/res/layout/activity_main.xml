@@ -58,14 +58,6 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="netology_logo,publish_day" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/end_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="likeIcon, shareIcon,viewsIcon" />
-
-
     <TextView
         android:id="@+id/post_content"
         android:layout_width="0dp"
@@ -73,8 +65,8 @@
         android:layout_margin="@dimen/general_spacing16dp"
         android:autoLink="web"
         android:text="@string/post_content_text"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_barrier" />
 
     <ImageButton
@@ -94,20 +86,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:text="@string/shareCount"
         app:layout_constraintBottom_toBottomOf="@id/shareIcon"
         app:layout_constraintStart_toEndOf="@id/shareIcon"
-        app:layout_constraintTop_toTopOf="@+id/shareIcon" />
+        app:layout_constraintTop_toTopOf="@+id/shareIcon"
+        tools:text="@string/shareCount" />
 
     <TextView
         android:id="@+id/likesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:text="@string/likesCount"
         app:layout_constraintBottom_toBottomOf="@id/likeIcon"
         app:layout_constraintStart_toEndOf="@id/likeIcon"
-        app:layout_constraintTop_toTopOf="@+id/likeIcon" />
+        app:layout_constraintTop_toTopOf="@+id/likeIcon"
+        tools:text="@string/likesCount" />
 
 
     <TextView
