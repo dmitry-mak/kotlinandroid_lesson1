@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
         viewModel.data.observe(this) { post ->
             with(binding) {
                 postContent.text = post.content
