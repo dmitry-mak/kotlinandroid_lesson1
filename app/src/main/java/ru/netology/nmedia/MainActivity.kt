@@ -21,20 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         applyInsets(binding)
 
-    }
-
-    private fun applyInsets(binding: ActivityMainBinding) {
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(
-                v.paddingLeft + systemBars.left,
-                v.paddingTop + systemBars.top,
-                v.paddingRight + systemBars.right,
-                v.paddingBottom + systemBars.bottom
-            )
-            insets
-        }
-
         viewModel.data.observe(this) { post ->
             with(binding) {
                 postContent.text = post.content
@@ -59,6 +45,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.shareIcon.setOnClickListener {
             viewModel.share()
+        }
+
+    }
+
+    private fun applyInsets(binding: ActivityMainBinding) {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(
+                v.paddingLeft + systemBars.left,
+                v.paddingTop + systemBars.top,
+                v.paddingRight + systemBars.right,
+                v.paddingBottom + systemBars.bottom
+            )
+            insets
         }
     }
 }
