@@ -15,16 +15,35 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: PostViewModel by viewModels()
 
+    //    Использую lateinit, чтобы не инициализировать var binding и var adapter в
+    //    момент объявления, а отложить  инициализацию до момента вызова onCreate.
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var adapter: PostAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        applyInsets(binding)
+
+        setupAdapter()
+        setupObservers()
+        applyInsets()
+
+//        val viewModel: PostViewModel by viewModels()
+//        val adapter = PostAdapter(
+//            onLikeListener = { post -> viewModel.like(post.id) },
+//            onShareListener = { post -> viewModel.share(post.id) }
+//        )
+//
+//        binding.list.adapter = adapter
+//        viewModel.data.observe(this) { posts ->
+//            adapter.submitList(posts)
+//        }
     }
 
-    private fun applyInsets(binding: ActivityMainBinding) {
+    private fun applyInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(
@@ -35,13 +54,17 @@ class MainActivity : AppCompatActivity() {
             )
             insets
         }
+    }
 
-        val adapter = PostAdapter (
+    private fun setupAdapter() {
+        adapter = PostAdapter(
             onLikeListener = { post -> viewModel.like(post.id) },
             onShareListener = { post -> viewModel.share(post.id) }
-            )
-
+        )
         binding.list.adapter = adapter
+    }
+
+    private fun setupObservers() {
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
