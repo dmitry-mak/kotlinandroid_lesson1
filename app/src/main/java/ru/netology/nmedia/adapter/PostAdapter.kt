@@ -2,6 +2,7 @@ package ru.netology.nmedia.adapter
 
 import android.view.ViewGroup
 import android.view.LayoutInflater
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,13 +12,23 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.dto.Post
 
 
-typealias OnLikeListener = (post: Post) -> Unit
-typealias OnShareListener = (post: Post) -> Unit
+//typealias OnLikeListener = (post: Post) -> Unit
+//typealias OnShareListener = (post: Post) -> Unit
+//typealias OnRemoveListener = (post: Post) -> Unit
 
+
+interface OnInteractionListener {
+    fun onLike(post: Post)
+    fun onShare(post: Post)
+    fun onRemove(post: Post)
+    fun onEdit(post: Post)
+}
 
 class PostAdapter(
-    private var onLikeListener: OnLikeListener,
-    private var onShareListener: OnShareListener
+//    private val onLikeListener: OnLikeListener,
+//    private val onShareListener: OnShareListener,
+//    private val onRemoveListener: OnRemoveListener
+    private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(
@@ -25,7 +36,7 @@ class PostAdapter(
             parent,
             false
         )
-        return PostViewHolder(binding, onLikeListener, onShareListener)
+        return PostViewHolder(binding, onInteractionListener)
     }
 
     override fun onBindViewHolder(
@@ -40,8 +51,10 @@ class PostAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onLikeListener: OnLikeListener,
-    private val onShareListener: OnShareListener
+//    private val onLikeListener: OnLikeListener,
+//    private val onShareListener: OnShareListener,
+//    private val onRemoveListener: OnRemoveListener
+    private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -57,10 +70,33 @@ class PostViewHolder(
                 }
             )
             likeIcon.setOnClickListener {
-                onLikeListener(post)
+//                onLikeListener(post)
+                onInteractionListener.onLike(post)
             }
-            shareIcon.setOnClickListener { onShareListener(post) }
+//            shareIcon.setOnClickListener { onShareListener(post) }
+            shareIcon.setOnClickListener { onInteractionListener.onShare(post) }
             shareCount.text = DiffMethods.convertNumber(post.sharesCount)
+            moreButton.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.options_post)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.remove -> {
+//                                onRemoveListener(post)
+                                onInteractionListener.onRemove(post)
+                                true
+                            }
+
+                            R.id.edit -> {
+                                onInteractionListener.onEdit(post)
+                                true
+                            }
+
+                            else -> false
+                        }
+                    }
+                }.show()
+            }
         }
     }
 }

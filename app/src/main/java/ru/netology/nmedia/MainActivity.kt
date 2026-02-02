@@ -1,13 +1,17 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.utils.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 
@@ -29,44 +33,85 @@ class MainActivity : AppCompatActivity() {
 
         setupAdapter()
         setupObservers()
+        setupListeners()
         applyInsets()
-
-//        val viewModel: PostViewModel by viewModels()
-//        val adapter = PostAdapter(
-//            onLikeListener = { post -> viewModel.like(post.id) },
-//            onShareListener = { post -> viewModel.share(post.id) }
-//        )
-//
-//        binding.list.adapter = adapter
-//        viewModel.data.observe(this) { posts ->
-//            adapter.submitList(posts)
-//        }
     }
+
 
     private fun applyInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(
-                v.paddingLeft + systemBars.left,
-                v.paddingTop + systemBars.top,
-                v.paddingRight + systemBars.right,
-                v.paddingBottom + systemBars.bottom
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
             )
             insets
         }
     }
 
     private fun setupAdapter() {
-        adapter = PostAdapter(
-            onLikeListener = { post -> viewModel.like(post.id) },
-            onShareListener = { post -> viewModel.share(post.id) }
-        )
+        adapter = PostAdapter(object : OnInteractionListener {
+            override fun onLike(post: Post) {
+                viewModel.like(post.id)
+            }
+
+            override fun onShare(post: Post) {
+                viewModel.share(post.id)
+            }
+
+            override fun onRemove(post: Post) {
+                viewModel.removeById(post.id)
+            }
+
+            override fun onEdit(post: Post) {
+                viewModel.edit(post)
+            }
+        })
+
+//            onLikeListener = { post -> viewModel.like(post.id) },
+//            onShareListener = { post -> viewModel.share(post.id) },
+//            onRemoveListener = { post -> viewModel.removeById(post.id) }
+//        )
         binding.list.adapter = adapter
     }
 
     private fun setupObservers() {
         viewModel.data.observe(this) { posts ->
-            adapter.submitList(posts)
+            val newPost = posts.size > adapter.currentList.size
+            adapter.submitList(posts) {
+                if (newPost) {
+                    binding.list.smoothScrollToPosition(0)
+                }
+            }
+        }
+    }
+
+    private fun setupListeners() {
+        binding.save.setOnClickListener {
+            with(binding.content) {
+                val text = text.toString()
+                if (text.isBlank()) {
+                    Toast.makeText(this@MainActivity, R.string.empty_notificaton, Toast.LENGTH_LONG)
+                        .show()
+                    return@setOnClickListener
+                }
+                viewModel.save(text)
+//                binding.list.smoothScrollToPosition(0)
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyboard(binding.content)
+            }
+        }
+        viewModel.edited.observe(this) { post ->
+            if (post.id != 0L) {
+                with(binding.content) {
+                    setText(post.content)
+                    requestFocus()
+                    AndroidUtils.showKeyboard(binding.content)
+                }
+            }
         }
     }
 }
