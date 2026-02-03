@@ -9,7 +9,7 @@ import ru.netology.nmedia.repository.PostRepositoryInMemory
 private val empty = Post(
     id = 0,
     author = "Netology",
-    published = "",
+    published = "02 February 20:34",
     content = "",
     likesCount = 0,
     sharesCount = 0,
@@ -46,6 +46,9 @@ class PostViewModel : ViewModel() {
 
     fun edit(post: Post){
         edited.value = post
-
     }
+
+    fun cancelEditing(){
+        edited.value = empty
+        }
 }

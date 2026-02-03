@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -19,8 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: PostViewModel by viewModels()
 
-    //    Использую lateinit, чтобы не инициализировать var binding и var adapter в
-    //    момент объявления, а отложить  инициализацию до момента вызова onCreate.
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: PostAdapter
 
@@ -86,6 +85,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        viewModel.edited.observe(this) { post ->
+            if (post.id != 0L) {
+                binding.editGroup.visibility = View.VISIBLE
+                binding.content.setText(post.content)
+                binding.content.requestFocus()
+                AndroidUtils.showKeyboard(binding.content)
+            } else {
+                binding.editGroup.visibility = View.GONE
+                binding.content.setText("")
+                binding.content.clearFocus()
+                AndroidUtils.hideKeyboard(binding.content)
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -93,7 +105,11 @@ class MainActivity : AppCompatActivity() {
             with(binding.content) {
                 val text = text.toString()
                 if (text.isBlank()) {
-                    Toast.makeText(this@MainActivity, R.string.empty_notificaton, Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        this@MainActivity,
+                        R.string.empty_notificaton,
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                     return@setOnClickListener
                 }
@@ -104,14 +120,20 @@ class MainActivity : AppCompatActivity() {
                 AndroidUtils.hideKeyboard(binding.content)
             }
         }
-        viewModel.edited.observe(this) { post ->
-            if (post.id != 0L) {
-                with(binding.content) {
-                    setText(post.content)
-                    requestFocus()
-                    AndroidUtils.showKeyboard(binding.content)
-                }
-            }
+//        viewModel.edited.observe(this) { post ->
+//            if (post.id != 0L) {
+//                with(binding.content) {
+//                    setText(post.content)
+//                    requestFocus()
+//                    AndroidUtils.showKeyboard(binding.content)
+//                }
+//            }
+//        }
+        binding.editCancelButton.setOnClickListener {
+            viewModel.cancelEditing()
+            binding.content.setText("")
+            binding.content.clearFocus()
+            AndroidUtils.hideKeyboard(binding.content)
         }
     }
 }
