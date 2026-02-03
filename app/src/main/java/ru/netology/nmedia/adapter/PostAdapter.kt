@@ -12,11 +12,6 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.dto.Post
 
 
-//typealias OnLikeListener = (post: Post) -> Unit
-//typealias OnShareListener = (post: Post) -> Unit
-//typealias OnRemoveListener = (post: Post) -> Unit
-
-
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onShare(post: Post)
@@ -25,9 +20,6 @@ interface OnInteractionListener {
 }
 
 class PostAdapter(
-//    private val onLikeListener: OnLikeListener,
-//    private val onShareListener: OnShareListener,
-//    private val onRemoveListener: OnRemoveListener
     private val onInteractionListener: OnInteractionListener
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -51,9 +43,6 @@ class PostAdapter(
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-//    private val onLikeListener: OnLikeListener,
-//    private val onShareListener: OnShareListener,
-//    private val onRemoveListener: OnRemoveListener
     private val onInteractionListener: OnInteractionListener
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
@@ -70,10 +59,8 @@ class PostViewHolder(
                 }
             )
             likeIcon.setOnClickListener {
-//                onLikeListener(post)
                 onInteractionListener.onLike(post)
             }
-//            shareIcon.setOnClickListener { onShareListener(post) }
             shareIcon.setOnClickListener { onInteractionListener.onShare(post) }
             shareCount.text = DiffMethods.convertNumber(post.sharesCount)
             moreButton.setOnClickListener {
@@ -82,7 +69,6 @@ class PostViewHolder(
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
-//                                onRemoveListener(post)
                                 onInteractionListener.onRemove(post)
                                 true
                             }

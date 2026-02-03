@@ -68,11 +68,6 @@ class MainActivity : AppCompatActivity() {
                 viewModel.edit(post)
             }
         })
-
-//            onLikeListener = { post -> viewModel.like(post.id) },
-//            onShareListener = { post -> viewModel.share(post.id) },
-//            onRemoveListener = { post -> viewModel.removeById(post.id) }
-//        )
         binding.list.adapter = adapter
     }
 
@@ -114,21 +109,11 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
                 viewModel.save(text)
-//                binding.list.smoothScrollToPosition(0)
                 setText("")
                 clearFocus()
                 AndroidUtils.hideKeyboard(binding.content)
             }
         }
-//        viewModel.edited.observe(this) { post ->
-//            if (post.id != 0L) {
-//                with(binding.content) {
-//                    setText(post.content)
-//                    requestFocus()
-//                    AndroidUtils.showKeyboard(binding.content)
-//                }
-//            }
-//        }
         binding.editCancelButton.setOnClickListener {
             viewModel.cancelEditing()
             binding.content.setText("")
