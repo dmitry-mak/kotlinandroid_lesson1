@@ -11,4 +11,5 @@
     <string name="description_post_like"> Like</string>
     <string name="empty_notificaton" >Content can\'t be empty</string>"
     <string name="menu_edit"> Edit</string>
+    <string name="editing_post">Editing Post</string>
 </resources>

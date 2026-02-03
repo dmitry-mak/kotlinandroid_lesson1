@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Editing Post"
+        android:text="@string/editing_post"
         android:textStyle="bold"
         android:textColor="@android:color/holo_blue_dark"
         android:gravity="center"
