@@ -8,4 +8,5 @@
     <string name="empty_notificaton">Содержание поста не может быть пустым</string>
     <string name="menu_edit">Изменить</string>
     <string name="editing_post">Редактирование поста</string>
+    <string name="author_logo">Аватар автора</string>
 </resources>

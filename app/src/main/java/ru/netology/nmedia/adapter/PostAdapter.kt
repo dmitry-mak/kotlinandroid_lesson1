@@ -50,19 +50,15 @@ class PostViewHolder(
             author.text = post.author
             publishDay.text = post.published
             postContent.text = post.content
-            likesCount.text = DiffMethods.convertNumber(post.likesCount)
-            likeIcon.setImageResource(
-                if (post.isLiked) {
-                    R.drawable.ic_heartred_24
-                } else {
-                    R.drawable.heart24
-                }
-            )
+//            likesCount.text = DiffMethods.convertNumber(post.likesCount)
+            likeIcon.isChecked = post.isLiked
+            likeIcon.text = DiffMethods.convertNumber(post.likesCount)
             likeIcon.setOnClickListener {
                 onInteractionListener.onLike(post)
             }
+            shareIcon.text = DiffMethods.convertNumber(post.sharesCount)
             shareIcon.setOnClickListener { onInteractionListener.onShare(post) }
-            shareCount.text = DiffMethods.convertNumber(post.sharesCount)
+//            shareCount.text = DiffMethods.convertNumber(post.sharesCount)
             moreButton.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)

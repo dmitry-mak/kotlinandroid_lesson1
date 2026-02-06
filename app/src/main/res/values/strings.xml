@@ -12,4 +12,6 @@
     <string name="empty_notificaton" >Content can\'t be empty</string>"
     <string name="menu_edit"> Edit</string>
     <string name="editing_post">Editing Post</string>
+    <string name="author_logo">Author logo</string>
+    <string name="views" translatable="false">Views</string>
 </resources>
