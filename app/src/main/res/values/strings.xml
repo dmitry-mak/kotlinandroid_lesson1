@@ -9,9 +9,11 @@
     <string name="menu_remove">Remove</string>
     <string name="post_text">Post text</string>
     <string name="description_post_like"> Like</string>
-    <string name="empty_notificaton" >Content can\'t be empty</string>"
+    <string name="empty_notificaton">Content can\'t be empty</string>"
     <string name="menu_edit"> Edit</string>
     <string name="editing_post">Editing Post</string>
     <string name="author_logo">Author logo</string>
     <string name="views" translatable="false">Views</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="add_post" translatable="false">Add post</string>
 </resources>

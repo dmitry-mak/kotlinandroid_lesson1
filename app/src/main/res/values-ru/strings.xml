@@ -9,4 +9,5 @@
     <string name="menu_edit">Изменить</string>
     <string name="editing_post">Редактирование поста</string>
     <string name="author_logo">Аватар автора</string>
+    <string name="chooser_share_post">Поделиться</string>
 </resources>
