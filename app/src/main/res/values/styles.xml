@@ -5,4 +5,8 @@
         <item name="buttonTint">@color/likeicon_color_selector</item>
     </style>
 
+    <style name="Widget.AppTheme.LikeIconButton" parent="Widget.Material3.Button.TextButton.Icon">
+            <item name="iconTint">@color/likeicon_color_selector</item>
+    </style>
+
 </resources>
