@@ -1,8 +1,11 @@
 package ru.netology.nmedia.adapter
 
+import android.content.Intent
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -79,6 +82,21 @@ class PostViewHolder(
                     }
                 }.show()
             }
+
+            val videoUrl = post.video?.trim().orEmpty()
+            videoContainer.isVisible = videoUrl.isNotBlank()
+            val openVideo: () -> Unit = {
+                if (videoUrl.isNotBlank()) {
+                    val intent = Intent(Intent.ACTION_VIEW, videoUrl.toUri())
+                    val context = itemView.context
+                    if (intent.resolveActivity(context.packageManager) != null) {
+                        context.startActivity(intent)
+                    }
+                }
+            }
+            videoContainer.setOnClickListener { openVideo() }
+            videoPreview.setOnClickListener { openVideo() }
+            videoPlay.setOnClickListener { openVideo() }
         }
     }
 }

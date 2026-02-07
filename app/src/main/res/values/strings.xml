@@ -16,4 +16,6 @@
     <string name="views" translatable="false">Views</string>
     <string name="chooser_share_post">Share post</string>
     <string name="add_post" translatable="false">Add post</string>
+    <string name="video" translatable="false">Video</string>
+    <string name="play" translatable="false">Play</string>
 </resources>

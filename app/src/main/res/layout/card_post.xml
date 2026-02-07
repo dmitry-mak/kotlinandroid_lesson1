@@ -115,7 +115,7 @@
         android:textStyle="normal"
         app:icon="@drawable/ic_like_selector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/post_content"
+        app:layout_constraintTop_toBottomOf="@id/video_container"
         tools:text="999" />
 
     <ImageView
@@ -129,4 +129,29 @@
         app:layout_constraintBottom_toBottomOf="@id/likeIcon"
         app:layout_constraintEnd_toStartOf="@id/viewsCount"
         app:layout_constraintTop_toTopOf="@id/likeIcon" />
+
+    <FrameLayout
+        android:id="@+id/video_container"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_content"
+        tools:visibility="visible">
+        <ImageView
+            android:id="@+id/video_preview"
+            android:contentDescription="@string/video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/xxhdpi_video_1080"/>
+        <ImageView
+            android:id="@+id/video_play"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/play"
+            android:src="@drawable/ic_play"/>
+        </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

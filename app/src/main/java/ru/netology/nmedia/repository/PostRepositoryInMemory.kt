@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
 
 class PostRepositoryInMemory : PostRepository {
-    private var nextId = 4L
+    private var nextId = 5L
     private var posts = listOf(
         Post(
             id = 1,
@@ -20,6 +20,7 @@ class PostRepositoryInMemory : PostRepository {
             author = "Нетология. Университет вообще всех профессий",
             published = "27 January, 17:46",
             content = "Тут какой-то случайный текст",
+            video = "https://rutube.ru/video/9c4cd5e82814d75c91383f32bf0ddc38",
             likesCount = 999,
             sharesCount = 9999
         ),

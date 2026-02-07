@@ -1,5 +1,9 @@
 package ru.netology.nmedia
 
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
+
 object DiffMethods {
     /**
      * Метод получает на вход число в формате 1 или 100 или 1000 или 10000
@@ -27,4 +31,9 @@ object DiffMethods {
         }
     }
 
+    fun getCurrentDateFormatted (): String{
+        val now = Calendar.getInstance()
+        val formatter = SimpleDateFormat("d MMMM, HH:mm", Locale.ENGLISH)
+        return formatter.format(now.time)
+    }
 }
