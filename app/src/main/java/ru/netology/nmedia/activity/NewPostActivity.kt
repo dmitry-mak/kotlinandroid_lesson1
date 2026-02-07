@@ -44,11 +44,11 @@ class NewPostActivity : AppCompatActivity() {
     }
 }
 
-object NewPostContract: ActivityResultContract<Unit, String?>(){
+object NewPostContract: ActivityResultContract<String, String?>(){
     override fun createIntent(
         context: Context,
-        input: Unit
-    ) = Intent(context, NewPostActivity::class.java)
+        input: String
+    ) = Intent(context, NewPostActivity::class.java).apply { putExtra(Intent.EXTRA_TEXT, input) }
 
     override fun parseResult(
         resultCode: Int,
