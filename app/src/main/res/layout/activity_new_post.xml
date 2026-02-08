@@ -25,15 +25,12 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="80dp"
         android:background="@android:color/transparent"
         android:gravity="top"
         android:hint="@string/post_text"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
-        android:padding="16dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/save"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:padding="16dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
