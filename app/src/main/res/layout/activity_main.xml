@@ -62,7 +62,7 @@
         android:background="@android:color/transparent"
         android:padding="16dp"
         android:src="@drawable/ic_cancel_24"
-        app:layout_constraintBottom_toTopOf="@id/content"
+        app:layout_constraintBottom_toTopOf="@id/save"
         app:layout_constraintEnd_toEndOf="@id/save"
         app:layout_constraintStart_toStartOf="@id/save" />
 
