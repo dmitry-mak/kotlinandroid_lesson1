@@ -34,34 +34,11 @@ class FeedFragment : Fragment() {
     }
 
     private val viewModel: PostViewModel by activityViewModels()
-//    val newPostLauncher = registerForActivityResult(NewPostContract) {
-//        it ?: return@registerForActivityResult
-//        viewModel.save(it)
-//    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setupAdapter()
-//        setupObservers()
-//        setupListeners()
-//        applyInsets()
     }
 
-
-//    private fun applyInsets() {
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(
-//                systemBars.left,
-//                systemBars.top,
-//                systemBars.right,
-//                systemBars.bottom
-//            )
-//            insets
-//        }
-//    }
 
     private fun setupAdapter() {
         adapter = PostAdapter(object : OnInteractionListener {
@@ -86,7 +63,6 @@ class FeedFragment : Fragment() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-//                newPostLauncher.launch(post.content)
                 findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
 
             }
@@ -106,11 +82,6 @@ class FeedFragment : Fragment() {
     }
 
     private fun setupListeners() {
-//        binding.add.setOnClickListener {
-//            viewModel.cancelEditing()
-//            newPostLauncher.launch("")
-//        }
-//        findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
         }

@@ -53,7 +53,6 @@ class PostViewHolder(
             author.text = post.author
             publishDay.text = post.published
             postContent.text = post.content
-//            likesCount.text = DiffMethods.convertNumber(post.likesCount)
             likeIcon.isChecked = post.isLiked
             likeIcon.text = DiffMethods.convertNumber(post.likesCount)
             likeIcon.setOnClickListener {
@@ -61,7 +60,6 @@ class PostViewHolder(
             }
             shareIcon.text = DiffMethods.convertNumber(post.sharesCount)
             shareIcon.setOnClickListener { onInteractionListener.onShare(post) }
-//            shareCount.text = DiffMethods.convertNumber(post.sharesCount)
             moreButton.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.options_post)
