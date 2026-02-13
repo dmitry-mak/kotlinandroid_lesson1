@@ -109,6 +109,9 @@ class FeedFragment : Fragment() {
 //            viewModel.cancelEditing()
 //            newPostLauncher.launch("")
 //        }
+//        findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
+    binding.add.setOnClickListener {
         findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
+    }
     }
 }
