@@ -87,6 +87,7 @@ class FeedFragment : Fragment() {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
 //                newPostLauncher.launch(post.content)
+                findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
 
             }
         })
@@ -110,8 +111,8 @@ class FeedFragment : Fragment() {
 //            newPostLauncher.launch("")
 //        }
 //        findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
-    binding.add.setOnClickListener {
-        findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
-    }
+        binding.add.setOnClickListener {
+            findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
+        }
     }
 }
