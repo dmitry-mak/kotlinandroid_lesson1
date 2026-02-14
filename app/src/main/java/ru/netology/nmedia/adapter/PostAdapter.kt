@@ -20,6 +20,7 @@ interface OnInteractionListener {
     fun onShare(post: Post)
     fun onRemove(post: Post)
     fun onEdit(post: Post)
+    fun onOpen(post: Post)
 }
 
 class PostAdapter(
@@ -53,6 +54,9 @@ class PostViewHolder(
             author.text = post.author
             publishDay.text = post.published
             postContent.text = post.content
+
+            binding.root.setOnClickListener { onInteractionListener.onOpen(post) }
+
             likeIcon.isChecked = post.isLiked
             likeIcon.text = DiffMethods.convertNumber(post.likesCount)
             likeIcon.setOnClickListener {

@@ -66,6 +66,13 @@ class FeedFragment : Fragment() {
                 findNavController().navigate(R.id.action_feedFragment_to_newPostActivity)
 
             }
+
+            override fun onOpen (post: Post){
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_singlePostFragment,
+                    Bundle().apply { putLong(SinglePostFragment.POST_ID, post.id) }
+                )
+            }
         })
         binding.list.adapter = adapter
     }
