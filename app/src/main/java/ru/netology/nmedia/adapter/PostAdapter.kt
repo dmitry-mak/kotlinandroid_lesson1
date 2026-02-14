@@ -56,6 +56,7 @@ class PostViewHolder(
             postContent.text = post.content
 
             binding.root.setOnClickListener { onInteractionListener.onOpen(post) }
+            postContent.setOnClickListener { onInteractionListener.onOpen(post) }
 
             likeIcon.isChecked = post.isLiked
             likeIcon.text = DiffMethods.convertNumber(post.likesCount)
