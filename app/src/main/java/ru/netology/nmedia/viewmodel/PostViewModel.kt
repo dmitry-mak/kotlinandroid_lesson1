@@ -25,6 +25,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val data = repository.getData()
     val edited = MutableLiveData(empty)
 
+    val draftPost = MutableLiveData("")
+    fun setDraftPost(text: String){
+        draftPost.value = text
+    }
+    fun clearDraftPost(){
+        draftPost.value = ""
+    }
+
     fun like(id: Long) {
         repository.like(id)
     }
@@ -44,6 +52,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         edited.value = empty
+        clearDraftPost()
     }
 
     fun edit(post: Post) {

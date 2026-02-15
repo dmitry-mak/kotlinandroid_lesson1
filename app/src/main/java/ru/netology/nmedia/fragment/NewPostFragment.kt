@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -24,20 +25,36 @@ class NewPostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            val text = binding.content.text?.toString().orEmpty()
+            val isCreatingNew = (viewModel.edited.value?.id ?: 0L) == 0L
+            if (isCreatingNew) {
+                viewModel.setDraftPost(text)
+            }
+            findNavController().navigateUp()
+        }
 
         viewModel.edited.observe(viewLifecycleOwner) { post ->
             if (post.id != 0L) {
                 binding.content.setText(post.content)
                 binding.content.setSelection(binding.content.text?.length ?: 0)
             } else {
+                val draftText = viewModel.draftPost.value.orEmpty()
                 val initialText =
                     requireActivity().intent.getStringExtra(Intent.EXTRA_TEXT).orEmpty()
-                if (initialText.isNotBlank()) {
-                    binding.content.setText(initialText)
+                val textToShow = when {
+                    draftText.isNotBlank() -> draftText
+                    initialText.isNotBlank() -> initialText
+                    else -> ""
+                }
+                if (textToShow.isNotBlank()) {
+                    binding.content.setText(textToShow)
                     binding.content.setSelection(binding.content.text?.length ?: 0)
                     requireActivity().intent.removeExtra(Intent.EXTRA_TEXT)
+                } else {
+                    binding.content.setText("")
                 }
             }
         }
