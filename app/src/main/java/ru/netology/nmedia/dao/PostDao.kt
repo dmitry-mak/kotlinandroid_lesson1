@@ -1,12 +1,9 @@
 package ru.netology.nmedia.dao
 
-import android.provider.SyncStateContract.Helpers.update
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Ignore
 import androidx.room.Insert
 import androidx.room.Query
-import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.entity.PostEntity
 
 @Dao

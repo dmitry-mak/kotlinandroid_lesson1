@@ -1,16 +1,11 @@
 package ru.netology.nmedia.db
 
-import android.R.attr.version
 import android.content.Context
-import android.database.sqlite.SQLiteDatabase
-import android.database.sqlite.SQLiteOpenHelper
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import ru.netology.nmedia.dao.PostDao
 import ru.netology.nmedia.entity.PostEntity
-
-//import ru.netology.nmedia.dao.PostDaoImpl
 
 @Database(entities = [PostEntity::class], version = 1)
 abstract class AppDb : RoomDatabase() {
@@ -33,18 +28,3 @@ abstract class AppDb : RoomDatabase() {
                 .build()
     }
 }
-
-//class DbHelper(context: Context, dbVersion: Int, dbName: String, private val DDLs: Array<String>) :
-//    SQLiteOpenHelper(context, dbName, null, dbVersion) {
-//    override fun onCreate(db: SQLiteDatabase) {
-//        DDLs.forEach { db.execSQL(it) }
-//    }
-//
-//    override fun onUpgrade(
-//        db: SQLiteDatabase,
-//        oldVersion: Int,
-//        newVersion: Int
-//    ) {
-//        TODO("Not yet implemented")
-//    }
-//}
