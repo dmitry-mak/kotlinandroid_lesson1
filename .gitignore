@@ -14,3 +14,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/hs_err_pid26088.log
+/replay_pid26088.log
