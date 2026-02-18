@@ -2,6 +2,7 @@ package ru.netology.nmedia
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 object DiffMethods {
@@ -32,8 +33,10 @@ object DiffMethods {
     }
 
     fun getCurrentDateFormatted (): String{
-        val now = Calendar.getInstance()
+//        val now = Calendar.getInstance()
+      val now = System.currentTimeMillis()
         val formatter = SimpleDateFormat("d MMMM, HH:mm", Locale.ENGLISH)
-        return formatter.format(now.time)
+    //        return formatter.format(now.time)
+    return formatter.format(Date(now))
     }
 }
