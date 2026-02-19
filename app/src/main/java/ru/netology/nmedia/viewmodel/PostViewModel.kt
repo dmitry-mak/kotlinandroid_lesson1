@@ -11,7 +11,7 @@ import ru.netology.nmedia.repository.PostRepositoryRoomImpl
 private val empty = Post(
     id = 0,
     author = "Netology",
-    published = "02 February 20:34",
+    published = 0L,
     content = "",
     likesCount = 0,
     sharesCount = 0,

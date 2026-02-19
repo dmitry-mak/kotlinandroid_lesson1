@@ -32,11 +32,12 @@ object DiffMethods {
         }
     }
 
-    fun getCurrentDateFormatted (): String{
-//        val now = Calendar.getInstance()
-      val now = System.currentTimeMillis()
-        val formatter = SimpleDateFormat("d MMMM, HH:mm", Locale.ENGLISH)
-    //        return formatter.format(now.time)
-    return formatter.format(Date(now))
+    fun getCurrentDateFormatted(
+        millisPublished: Long,
+        locale: Locale = Locale.ENGLISH,
+        pattern: String = "d MMMM, HH:mm"
+    ): String {
+        val formatter = SimpleDateFormat(pattern, locale)
+        return formatter.format(Date(millisPublished))
     }
 }

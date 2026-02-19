@@ -52,7 +52,7 @@ class PostViewHolder(
     fun bind(post: Post) {
         binding.apply {
             author.text = post.author
-            publishDay.text = post.published
+            publishDay.text = DiffMethods.getCurrentDateFormatted(post.published)
             postContent.text = post.content
 
             binding.root.setOnClickListener { onInteractionListener.onOpen(post) }

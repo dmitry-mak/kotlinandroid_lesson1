@@ -49,7 +49,7 @@ class SinglePostFragment : Fragment() {
         val b = binding.post
 
         b.author.text = post.author
-        b.publishDay.text = post.published
+        b.publishDay.text = DiffMethods.getCurrentDateFormatted(post.published)
         b.postContent.text = post.content
 
         b.likeIcon.isChecked = post.isLiked

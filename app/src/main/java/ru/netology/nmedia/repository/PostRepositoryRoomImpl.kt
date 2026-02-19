@@ -27,6 +27,13 @@ class PostRepositoryRoomImpl(
     }
 
     override fun save(post: Post) {
-        dao.save(PostEntity.fromDto(post))
+//        dao.save(PostEntity.fromDto(post))
+        val toSave = if (post.id == 0L) {
+            post.copy(published = System.currentTimeMillis())
+        } else {
+            post
+        }
+        dao.save(PostEntity.fromDto(toSave))
     }
+
 }
