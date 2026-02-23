@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -53,6 +54,11 @@ dependencies {
 
     implementation(libs.androidx.room)
     ksp(libs.androidx.room.compiler)
+
+    implementation(platform (libs.firebase))
+    implementation(libs.firebase.messaging)
+    implementation(libs.play.services)
+    coreLibraryDesugaring(libs.desugaring)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

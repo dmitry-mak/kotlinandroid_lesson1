@@ -29,7 +29,7 @@ class SinglePostFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val binding = FragmentSinglePostBinding.inflate(inflater, container, false)
         val postId = requireArguments().getLong(POST_ID)
